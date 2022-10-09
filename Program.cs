@@ -19,26 +19,63 @@
 // i = 4, j = 2 -> такого числа в массиве нет
 // i = 1, j = 2 -> 2
 
-// Генерируем индекс проверяемой позиции
-int i = new Random().Next(0, 10);
-int j = new Random().Next(0, 10);
+// int i = new Random().Next(0, 10);
+// int j = new Random().Next(0, 10);
 
-// Генерируем размер массива 
-int rows = new Random().Next(5, 10);
-int columns = new Random().Next(5, 10);
+// int rows = new Random().Next(5, 10);
+// int columns = new Random().Next(5, 10);
 
-int[,] array = GetArray(rows, columns, 0, 9);
+// int[,] array = GetArray(rows, columns, 0, 9);
+// PrintArray(array);
+// SearchValue(i, j, rows, columns);
+
+// Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+
+int rows = new Random().Next(3, 5);
+int columns = new Random().Next(3, 5);
+int[,] array = GetArray(rows, columns, 0, 10);
 PrintArray(array);
-SearchValue(i, j, rows, columns);
+Console.WriteLine($"Среднее арифметическое каждого столбца: {AverageColumns(array)}");
+
+string AverageColumns(int[,] array)
+{
+    string result = string.Empty;
+    double res = 0;
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            res += array[i, j];
+        }
+        res = Math.Round(res / array.GetLength(0), 1);
+        if (j < array.GetLength(1) - 1)
+        {
+        result += Convert.ToString(res) + "; ";
+        }
+        else 
+        {
+            result += Convert.ToString(res) + ".";
+        }
+        res = 0;
+    }
+    return result;
+}
+
+
 
 
 void SearchValue(int i, int j, int rows, int columns)
 {
-    if (i < rows && j < columns) 
+    if (i < rows && j < columns)
     {
-        Console.WriteLine($"i = {i}, j = {j} -> {array [i,j]}");
+        Console.WriteLine($"i = {i}, j = {j} -> {array[i, j]}");
     }
-    else 
+    else
     {
         Console.WriteLine($"i = {i}, j = {j} -> такого элемента в массиве нет");
     }
